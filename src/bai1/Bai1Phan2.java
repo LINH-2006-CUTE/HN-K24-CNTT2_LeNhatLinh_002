@@ -4,36 +4,26 @@ import java.util.Scanner;
 
 public class Bai1Phan2 {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+                Scanner sc = new Scanner(System.in);
+                System.out.println("Nhập tên:");
+                String input = sc.nextLine();
+                StringBuilder cleanStr = new StringBuilder();
+                for (int i = 0; i < input.length(); i++) {
+                    char ch = input.charAt(i);
+                    if (Character.isLetter(ch) || ch == ' ') {
+                        cleanStr.append(ch);
+                    }
+                }
 
-        System.out.println("nhap mot chuoi bat ki:");
-        String input = sc.next();
-        input = input.toLowerCase().replace(" ", "");
-        int[] count = new int[1000];
-        int max = 0;
-
-        for (char ch : input.toCharArray()) {
-            count[ch]++;
-            if (count[ch] > max) {
-                max = count[ch];
+                String[] words = cleanStr.toString().trim().split("\\s+");
+                StringBuilder result = new StringBuilder();
+                for (String word : words) {
+                    if (!word.isEmpty()) {
+                        String firstChar = word.substring(0, 1).toUpperCase();
+                        String remain = word.substring(1).toLowerCase();
+                        result.append(firstChar).append(remain);
+                    }
+                }
+                System.out.println("Kết quả:" + result.toString());
             }
         }
-        // ki tu xuat hien nhieu nhat
-        for (char ch : input.toCharArray()) {
-            if (count[ch] == max) {
-                System.out.println(ch + " la ki tu xuat hien nhieu nhat");
-                break;
-            }
-        }
-        // tim ra ki tu dau tien khong lap trong chuoi da nhap, neu lap lai in ra thong bao khong tim thay
-        for (char ch : input.toCharArray()) {
-            if (count[ch] < max) {
-//                input.charAt(0);
-                System.out.println("output" + ch);
-//                break;
-            }
-            ;
-
-        }
-    }
-}
